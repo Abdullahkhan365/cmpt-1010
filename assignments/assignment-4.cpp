@@ -1,56 +1,68 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 using namespace std;
 
-int main(){
+int main()
+{
 
     string name;
-    int SalesDay;
+    int salesDays;
     double amount;
-    double Sum;
-    double AvgSales;
-    double HighSales =0;
-    double LowSales;
+    double sum = 0.0;
+    double averageSales = 0.0;
+    double highestSales = 0.0;
+    double lowestSales = 0.0;
 
     cout<<"Enter your name: ";
     cin>>name;
 
-    cout<<"How many days of sales?";
-    cin>>SalesDay;
+    cout<<"How many days of sales? ";
+    cin>>salesDays;
 
-    while(SalesDay < 0){
-            cout<<"How many days of sales?";
-            cin>>SalesDay;
-    }
-    
-    for(int day = 1; day <= SalesDay; day++)
+    while(salesDays < 0)
     {
-        cout<<"Enter sales for day "<<day<<":";
-        cin>>amount;
-        
-        while(amount < 0){
-        cout<<"Enter sales for day "<<day<<":";
-        cin>>amount;
-        }
-
-        Sum = Sum + amount;
-
-        if (amount > HighSales){
-            HighSales == amount;
-        }
-
+        cout<<"How many days of sales? ";
+        cin>>salesDays;
     }
 
-    AvgSales = Sum / SalesDay;
+    for(int day = 1; day <= salesDays; day++)
+    {
+        cout<<"Enter sales for day "<<day<<": ";
+        cin>>amount;
 
+        while(amount < 0)
+        {
+            cout<<"Enter sales for day "<<day<<": ";
+            cin>>amount;
+        }
 
-    cout<<"===== Sales Report ====";
+        sum += amount;
+
+        if(day == 1 || amount > highestSales)
+        {
+            highestSales = amount;
+        }
+
+        if(day == 1 || amount < lowestSales)
+        {
+            lowestSales = amount;
+        }
+    }
+
+    if(salesDays > 0)
+    {
+        averageSales = sum / salesDays;
+    }
+
+    cout << fixed << setprecision(2);
+    cout<<"===== Sales Report ====="<<endl;
     cout<<"Employee: "<<name<<endl;
-    cout<<"Number of days: "<<SalesDay<<endl;
-    cout<<"Total  sales: $"<<Sum<<endl;
-    cout<<"Average daily sales: $"<<AvgSales<<endl;
-    cout<<"Highest daily sales: $"<<HighSales<<endl;
-    cout<<"Lowest daily sales: $"<<endl;
+    cout<<"Number of days: "<<salesDays<<endl;
+    cout<<"Total sales: $"<<sum<<endl;
+    cout<<"Average daily sales: $"<<averageSales<<endl;
+    cout<<"Highest daily sales: $"<<highestSales<<endl;
+    cout<<"Lowest daily sales: $"<<lowestSales<<endl;
 
-
+    return 0;
 }
